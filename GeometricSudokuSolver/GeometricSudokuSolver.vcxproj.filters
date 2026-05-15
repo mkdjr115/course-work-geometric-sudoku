@@ -75,9 +75,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="App\GameController.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Core\Algorithms\HintProvider.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -111,12 +108,15 @@
     <ClInclude Include="Core\State\StateManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GUI\FieldWidget.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="GUI\MainWindow.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="GUI\FieldWidget.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="App\GameController.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
