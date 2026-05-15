@@ -3,12 +3,14 @@
 GameController::GameController(QObject* parent) : QObject(parent), m_field(nullptr) {
     m_factory = new GeometricShapeFactory();
     m_generator = new SudokuGenerator(m_factory);
+    m_stateManager = new StateManager();
 }
 
 GameController::~GameController() {
     if (m_field) delete m_field;
     delete m_generator;
     delete m_factory;
+    delete m_stateManager;
 }
 
 Field* GameController::getField() const {
@@ -16,9 +18,24 @@ Field* GameController::getField() const {
 }
 
 void GameController::generateNewGame() {
-    if (m_field) {
-        delete m_field;
-    }
+    if (m_field) delete m_field;
+    m_stateManager->clear();
     m_field = m_generator->generate(9);
+    emit fieldUpdated();
+}
+
+void GameController::setCellValue(int x, int y, int value) {
+    if (!m_field) return;
+    Cell* cell = m_field->getCell(x, y);
+    if (cell && cell->getValue() != value) {
+        m_stateManager->saveState(m_field);
+        cell->setValue(value);
+        emit fieldUpdated();
+    }
+}
+
+void GameController::undo() {
+    if (!m_field) return;
+    m_stateManager->undo(m_field);
     emit fieldUpdated();
 }

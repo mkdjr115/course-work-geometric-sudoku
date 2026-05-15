@@ -7,7 +7,9 @@ MainWindow::MainWindow(QWidget* parent)
     controller = new GameController(this);
 
     connect(generateButton, &QPushButton::clicked, this, &MainWindow::onGenerateClicked);
+    connect(undoButton, &QPushButton::clicked, controller, &GameController::undo);
     connect(controller, &GameController::fieldUpdated, this, &MainWindow::onFieldUpdated);
+    connect(fieldWidget, &FieldWidget::cellValueChanged, controller, &GameController::setCellValue);
 }
 
 MainWindow::~MainWindow() {
