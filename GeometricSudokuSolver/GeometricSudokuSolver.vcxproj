@@ -15,8 +15,7 @@
     <Keyword>QtVS_v304</Keyword>
     <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">10.0</WindowsTargetPlatformVersion>
     <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">10.0</WindowsTargetPlatformVersion>
-    <QtMsBuild Condition="'$(QtMsBuild)'=='' OR !Exists('$(QtMsBuild)\qt.targets')"
-      >$(MSBuildProjectDirectory)\QtMsBuild</QtMsBuild>
+    <QtMsBuild Condition="'$(QtMsBuild)'=='' OR !Exists('$(QtMsBuild)\qt.targets')">$(MSBuildProjectDirectory)\QtMsBuild</QtMsBuild>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
@@ -46,11 +45,8 @@
     <QtModules>core;gui;widgets</QtModules>
     <QtBuildConfig>release</QtBuildConfig>
   </PropertyGroup>
-  <Target Name="QtMsBuildNotFound"
-    BeforeTargets="CustomBuild;ClCompile"
-    Condition="!Exists('$(QtMsBuild)\qt.targets') or !Exists('$(QtMsBuild)\qt.props')">
-    <Message Importance="High"
-      Text="QtMsBuild: could not locate qt.targets, qt.props; project may not build correctly." />
+  <Target Name="QtMsBuildNotFound" BeforeTargets="CustomBuild;ClCompile" Condition="!Exists('$(QtMsBuild)\qt.targets') or !Exists('$(QtMsBuild)\qt.props')">
+    <Message Importance="High" Text="QtMsBuild: could not locate qt.targets, qt.props; project may not build correctly." />
   </Target>
   <ImportGroup Label="ExtensionSettings" />
   <ImportGroup Label="Shared" />
@@ -96,12 +92,38 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <QtRcc Include="GeometricSudokuSolver.qrc"/>
-    <QtUic Include="GeometricSudokuSolver.ui"/>
-    <QtMoc Include="GeometricSudokuSolver.h"/>
-    <ClCompile Include="GeometricSudokuSolver.cpp"/>
-    <ClCompile Include="main.cpp"/>
-
+    <QtRcc Include="GeometricSudokuSolver.qrc" />
+    <QtUic Include="GeometricSudokuSolver.ui" />
+    <ClCompile Include="App\GameController.cpp" />
+    <ClCompile Include="Core\Algorithms\HintProvider.cpp" />
+    <ClCompile Include="Core\Algorithms\SudokuSolver.cpp" />
+    <ClCompile Include="Core\Algorithms\Validator.cpp" />
+    <ClCompile Include="Core\Entities\Cell.cpp" />
+    <ClCompile Include="Core\Entities\Field.cpp" />
+    <ClCompile Include="Core\Entities\Shape.cpp" />
+    <ClCompile Include="Core\Generation\GeometricShapeFactory.cpp" />
+    <ClCompile Include="Core\Generation\SudokuGenerator.cpp" />
+    <ClCompile Include="Core\State\FieldMemento.cpp" />
+    <ClCompile Include="Core\State\StateManager.cpp" />
+    <ClCompile Include="GUI\FieldWidget.cpp" />
+    <ClCompile Include="GUI\MainWindow.cpp" />
+    <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="App\GameController.h" />
+    <ClInclude Include="Core\Algorithms\HintProvider.h" />
+    <ClInclude Include="Core\Algorithms\SudokuSolver.h" />
+    <ClInclude Include="Core\Algorithms\Validator.h" />
+    <ClInclude Include="Core\Entities\Cell.h" />
+    <ClInclude Include="Core\Entities\Field.h" />
+    <ClInclude Include="Core\Entities\Shape.h" />
+    <ClInclude Include="Core\Generation\GeometricShapeFactory.h" />
+    <ClInclude Include="Core\Generation\IShapeFactory.h" />
+    <ClInclude Include="Core\Generation\SudokuGenerator.h" />
+    <ClInclude Include="Core\State\FieldMemento.h" />
+    <ClInclude Include="Core\State\StateManager.h" />
+    <QtMoc Include="GUI\FieldWidget.h" />
+    <QtMoc Include="GUI\MainWindow.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
