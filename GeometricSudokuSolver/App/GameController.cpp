@@ -4,6 +4,7 @@ GameController::GameController(QObject* parent) : QObject(parent), m_field(nullp
     m_factory = new GeometricShapeFactory();
     m_generator = new SudokuGenerator(m_factory);
     m_stateManager = new StateManager();
+    m_solver = new SudokuSolver();
 }
 
 GameController::~GameController() {
@@ -11,6 +12,7 @@ GameController::~GameController() {
     delete m_generator;
     delete m_factory;
     delete m_stateManager;
+    delete m_solver;
 }
 
 Field* GameController::getField() const {
@@ -37,5 +39,12 @@ void GameController::setCellValue(int x, int y, int value) {
 void GameController::undo() {
     if (!m_field) return;
     m_stateManager->undo(m_field);
+    emit fieldUpdated();
+}
+
+void GameController::solve() {
+    if (!m_field) return;
+    m_stateManager->saveState(m_field);
+    m_solver->solve(m_field);
     emit fieldUpdated();
 }
