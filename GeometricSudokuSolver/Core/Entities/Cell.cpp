@@ -1,6 +1,6 @@
 #include "Cell.h"
 
-Cell::Cell(int x, int y) : m_x(x), m_y(y), m_value(0), m_isInitial(false) {
+Cell::Cell(int x, int y) : m_x(x), m_y(y), m_value(0), m_isInitial(false), m_isHinted(false) {
 }
 
 int Cell::getX() const {
@@ -25,4 +25,12 @@ bool Cell::isInitial() const {
 
 void Cell::setInitial(bool initial) {
     m_isInitial = initial;
+}
+
+bool Cell::isHinted() const {
+    return m_isHinted;
+}
+
+void Cell::setHinted(bool hinted) {
+    m_isHinted = hinted;
 }

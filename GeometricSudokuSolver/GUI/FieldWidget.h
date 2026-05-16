@@ -13,6 +13,9 @@ public:
     explicit FieldWidget(QWidget* parent = nullptr);
     void setField(Field* field);
 
+    int getSelectedX() const;
+    int getSelectedY() const;
+
 signals:
     void cellValueChanged(int x, int y, int value);
 
@@ -25,8 +28,6 @@ private:
     Field* m_field;
     int m_selectedX;
     int m_selectedY;
-
-    Shape* getShapeOfCell(int x, int y) const;
 };
 
 #endif

@@ -6,6 +6,7 @@
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QWidget>
+#include <QMessageBox>
 #include "FieldWidget.h"
 #include "../App/GameController.h"
 
@@ -18,7 +19,9 @@ public:
 
 private slots:
     void onGenerateClicked();
+    void onHintClicked();
     void onFieldUpdated();
+    void onGameFinished(bool won);
 
 private:
     QWidget* centralWidget;

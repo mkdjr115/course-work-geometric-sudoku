@@ -3,6 +3,7 @@
 
 #include "../Entities/Field.h"
 #include "Validator.h"
+#include <vector>
 
 class SudokuSolver {
 public:
@@ -12,7 +13,8 @@ public:
 
 private:
     Validator* m_validator;
-    bool findEmptyCell(Field* field, int& x, int& y);
+    bool findBestEmptyCell(Field* field, int& x, int& y);
+    std::vector<int> getValidCandidates(Field* field, int x, int y);
 };
 
 #endif
